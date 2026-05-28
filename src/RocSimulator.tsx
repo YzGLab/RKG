@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback, useRef } from 'react'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts'
+import { saveBlobFile, saveTextFile } from './fileExport'
 import { generateAllROC, interpolateROC, normalCDF, type IndicatorConfig, type AllRocResult } from './stats'
 
 const COLORS = ['#2563eb', '#dc2626', '#16a34a', '#f59e0b', '#8b5cf6', '#ec4899']
@@ -80,7 +81,7 @@ export default function RocSimulator() {
     setResults(batches)
   }, [indicators, nPositive, nNegative, batchCount, showCombined])
 
-  const downloadCSV = () => {
+  const downloadCSV = async () => {
     if (results.length === 0) return
     const indNames = indicators.map(ind => ind.name)
     const hasCombined = results[0].combined != null
@@ -95,11 +96,7 @@ export default function RocSimulator() {
         rows.push(row.join(','))
       })
     }
-    const blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url; a.download = 'roc_data.csv'; a.click()
-    URL.revokeObjectURL(url)
+    await saveTextFile('roc_data.csv', rows.join('\n'), 'text/csv;charset=utf-8;')
   }
 
   const exportImage = useCallback(() => {
@@ -126,8 +123,7 @@ export default function RocSimulator() {
       URL.revokeObjectURL(url)
       canvas.toBlob(b => {
         if (!b) return
-        const a = document.createElement('a')
-        a.download = 'roc_curve.png'; a.href = URL.createObjectURL(b); a.click()
+        void saveBlobFile('roc_curve.png', b)
       }, 'image/png')
     }
     img.src = url

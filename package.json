@@ -1,5 +1,5 @@
 {
-  "name": "medical-curve-simulator",
+  "name": "medcurvehelp",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@tauri-apps/api": "^2.11.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "recharts": "^2.15.0"

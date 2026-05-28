@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "medical-curve-simulator",
+  "productName": "MedcurveHelp",
   "version": "0.1.0",
-  "identifier": "com.medical-curve-simulator.app",
+  "identifier": "com.medcurvehelp.desktop",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Medical Curve Simulator",
+        "title": "MedcurveHelp",
         "width": 800,
         "height": 600,
         "resizable": true,

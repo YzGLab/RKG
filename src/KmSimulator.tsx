@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback, useRef } from 'react'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts'
+import { saveBlobFile, saveTextFile } from './fileExport'
 import { generateKMData, interpolateKM } from './stats'
 
 const COLORS = ['#2563eb', '#dc2626', '#16a34a', '#f59e0b', '#8b5cf6', '#ec4899']
@@ -88,7 +89,7 @@ export default function KmSimulator() {
     setResults(r)
   }, [groups, batchCount])
 
-  const downloadCSV = () => {
+  const downloadCSV = async () => {
     if (results.length === 0) return
     const rows = ['﻿组名,批次,样本ID,时间,事件(1=事件/0=删失)']
     for (const r of results) {
@@ -96,11 +97,7 @@ export default function KmSimulator() {
         rows.push(`${r.groupName},${r.batchIndex + 1},${i + 1},${d.time},${d.event}`)
       })
     }
-    const blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url; a.download = 'km_data.csv'; a.click()
-    URL.revokeObjectURL(url)
+    await saveTextFile('km_data.csv', rows.join('\n'), 'text/csv;charset=utf-8;')
   }
 
   const exportImage = useCallback(() => {
@@ -127,8 +124,7 @@ export default function KmSimulator() {
       URL.revokeObjectURL(url)
       canvas.toBlob(b => {
         if (!b) return
-        const a = document.createElement('a')
-        a.download = 'km_curve.png'; a.href = URL.createObjectURL(b); a.click()
+        void saveBlobFile('km_curve.png', b)
       }, 'image/png')
     }
     img.src = url
