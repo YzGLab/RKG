@@ -22,8 +22,8 @@ function NumSlider({ label, value, min, max, step, onChange }: {
     <div className="slider-row">
       <div className="slider-label">
         <span>{label}</span>
-        <input type="number" className="num-input" value={value} min={min} max={max} step={step}
-          onChange={e => { const v = parseFloat(e.target.value); if (!isNaN(v)) onChange(Math.max(min, Math.min(max, v))) }} />
+        <input type="number" className="num-input" value={value} min={min} step={step}
+          onChange={e => { const v = parseFloat(e.target.value); if (!isNaN(v)) onChange(Math.max(min, v)) }} />
       </div>
       <input type="range" min={min} max={max} step={step}
         value={Math.max(min, Math.min(max, value))}

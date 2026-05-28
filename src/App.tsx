@@ -9,7 +9,10 @@ export default function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1 className="title">医学曲线模拟器</h1>
+        <div className="brand">
+          <img className="brand-logo" src="/medhelp-logo.png" alt="MedHelp" />
+          <h1 className="title">医学曲线模拟器</h1>
+        </div>
         <nav className="tabs">
           <button className={`tab ${tab === 'roc' ? 'active' : ''}`} onClick={() => setTab('roc')}>
             ROC 曲线

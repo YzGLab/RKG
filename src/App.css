@@ -23,10 +23,25 @@ body {
 .header {
   background: var(--card);
   border-bottom: 1px solid var(--border);
-  padding: 12px 24px;
+  padding: 10px 24px;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand-logo {
+  display: block;
+  width: 132px;
+  height: 44px;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
@@ -308,6 +323,29 @@ body {
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: 10px 12px;
+    gap: 12px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .brand {
+    width: 100%;
+    gap: 10px;
+  }
+  .brand-logo {
+    width: 108px;
+    height: 36px;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .tabs {
+    width: 100%;
+  }
+  .tab {
+    flex: 1;
+  }
   .simulator {
     grid-template-columns: 1fr;
     grid-template-rows: auto 400px auto;
