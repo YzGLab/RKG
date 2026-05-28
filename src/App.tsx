@@ -4,6 +4,7 @@ import KmSimulator from './KmSimulator'
 
 export default function App() {
   const [tab, setTab] = useState<'roc' | 'km'>('roc')
+  const repositoryUrl = 'https://github.com/YzGLab/RKG'
 
   return (
     <div className="app">
@@ -21,6 +22,16 @@ export default function App() {
       <main className="main">
         {tab === 'roc' ? <RocSimulator /> : <KmSimulator />}
       </main>
+      <a
+        className="repo-origin"
+        href={repositoryUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Repository source: YzGLab/RKG"
+      >
+        <span className="repo-origin__label">来源仓库</span>
+        <span className="repo-origin__name">YzGLab/RKG</span>
+      </a>
     </div>
   )
 }
