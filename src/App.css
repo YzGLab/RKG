@@ -49,6 +49,42 @@ body {
 
 .main { flex: 1; padding: 16px; overflow: hidden; }
 
+.repo-origin {
+  position: fixed;
+  left: 14px;
+  bottom: 10px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100vw - 28px);
+  padding: 5px 9px;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.repo-origin:hover {
+  border-color: rgba(37, 99, 235, 0.42);
+  color: var(--primary);
+}
+
+.repo-origin__label {
+  color: var(--text-secondary);
+}
+
+.repo-origin__name {
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
 .simulator {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -278,4 +314,9 @@ body {
     height: auto;
   }
   .controls { grid-row: auto; }
+  .repo-origin {
+    left: 10px;
+    bottom: 8px;
+    padding: 5px 7px;
+  }
 }
